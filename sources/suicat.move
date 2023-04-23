@@ -45,6 +45,7 @@ module suicat::suicat {
 
     struct SuiCat has key, store {
         id: UID,
+        index: u16,
         name: String
     }
 
@@ -249,6 +250,7 @@ module suicat::suicat {
 
         SuiCat {
             id: object::new(ctx),
+            index,
             name: generate_name(index)
         }
     }
@@ -351,6 +353,7 @@ module suicat::suicat {
 
             let nft = SuiCat {
                 id: object::new(ctx),
+                index,
                 name: generate_name(index)
             };
 
