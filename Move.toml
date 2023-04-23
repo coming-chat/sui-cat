@@ -1,0 +1,14 @@
+[package]
+name = "suicat"
+version = "0.0.1"
+#published-at = ""
+
+[dependencies]
+# TODO
+#Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework", rev = "devnet" }
+Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" }
+
+[addresses]
+suicat =  "0x0"
+# TODO: replace on mainnet
+beneficiary = "0x0f6e65716f1a33317c8914b24cc006475e6fafd797e34ffae72c76bf5ed4be12"
