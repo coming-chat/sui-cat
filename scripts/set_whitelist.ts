@@ -16,15 +16,10 @@ function read_json() {
 function load() {
     const whitelist = read_json()
 
-    var addresses: string[] = []
-    for(var i = 0; i < whitelist.length; i++) {
-        addresses.push(whitelist[i].address)
-    }
-
     console.log("load items:", whitelist.length)
     assert.equal(whitelist.length, 9873)
 
-    return addresses
+    return whitelist
 }
 
 function batch_serialize() {
