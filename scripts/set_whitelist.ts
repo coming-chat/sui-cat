@@ -26,7 +26,7 @@ async function main() {
     const ser_whitelist = batch_serialize(dataPath)
     console.log("batch size", ser_whitelist.length)
 
-    for (let i = 39; i < ser_whitelist.length; i++) {
+    for (let i = 0; i < ser_whitelist.length; i++) {
         const txb = new TransactionBlock();
         txb.setGasBudget(10000000000)
 
@@ -47,15 +47,15 @@ async function main() {
 
         console.log("current batch: ", i)
 
-        // const result = await signer.dryRunTransactionBlock({
-        //     transactionBlock: txb
-        // });
-        // console.log(result.effects.gasUsed, result.effects?.status)
-
-        const result = await signer.signAndExecuteTransactionBlock({
-            transactionBlock: txb, options: {showEffects: true}
+        const result = await signer.dryRunTransactionBlock({
+            transactionBlock: txb
         });
-        console.log({ result }, result.effects?.status)
+        console.log(result.effects.gasUsed, result.effects?.status)
+
+        // const result = await signer.signAndExecuteTransactionBlock({
+        //     transactionBlock: txb, options: {showEffects: true}
+        // });
+        // console.log({ result }, result.effects?.status)
 
         await delay(10000)
     }
