@@ -13,8 +13,8 @@ async function main() {
     const provider = new JsonRpcProvider(testnetConnection)
     const signer = new RawSigner(keypair, provider)
 
-    const packageId = "0xf1d4ee4b3a2787cd066180857fa0170ccd721c28e20d5f334f48d585ed367284"
-    const global = "0x5055e205e2a783376ad64e1d49ae87409ac171e4d9c8d3ade32fc74cb0d112c0"
+    const packageId = "0xc5b18811206c9ef35b516cd90f1736e7504f17fec147179298cc6851f2aa10a9"
+    const global = "0x9876b64fad60ef76235f56c3221a4ee1aa891eaa3b86b10ed16195169c7c3e19"
     const startTime = 1682065800000; // 2023-04-21 16:30:00
 
     const txb = new TransactionBlock();

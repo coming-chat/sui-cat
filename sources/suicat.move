@@ -27,11 +27,11 @@ module suicat::suicat {
 
     const MAX_SUPPLY: u16 = 10000;
     const MAX_U64: u64 = 18446744073709551615;
-    const START: u64 = 1682233200000; // 2023-04-23 15:00:00
+    const START: u64 = 1682427600000; // 2023-04-25 21:00:00
     const STAGE_WHITELIST: u64 = 72 * 60 * 60 * 1000; // 72 hours for whitelist
     // TODO: replace on mainnet
-    const PRICE_WHITELIST: u64 = 20_000_000; // 0.02 SUI
-    const PRICE_PUBLIC: u64 = 30_000_000; // 0.03 SUI
+    const PRICE_WHITELIST: u64 = 900_000_000; // 0.9 SUI
+    const PRICE_PUBLIC: u64 = 1_000_000_000; // 1 SUI
     const TEAM_RESERVE: u16 = 3000;
 
     const ERR_NO_PERMISSION: u64 = 1;
@@ -391,25 +391,6 @@ module suicat::suicat {
 
             global.minted_public = global.minted_public + 1
         }
-    }
-
-    // only for testnet
-    // TODO: delete this on mainnet
-    public entry fun mint_free(
-        global: &mut Global,
-        clock: &Clock,
-        receiver: address,
-        ctx: &mut TxContext
-    ) {
-        let account = tx_context::sender(ctx);
-        let remain_count = remain(global);
-        let now = timestamp_ms(clock);
-
-        assert!(now >= global.start_time, ERR_NOT_START);
-        assert!(global.creator == account, ERR_NO_PERMISSION);
-
-        let nft = select_nft(global, remain_count, ctx);
-        transfer::public_transfer(nft, receiver);
     }
 
     public entry fun withdraw(

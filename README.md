@@ -19,6 +19,7 @@ The basic set of properties suggested includes:
 
 struct SuiCat has key,store {
     id: UID,
+    index: u16,
     name: String
 }
 ```
@@ -115,11 +116,11 @@ sui client publish --gas-budget 1000000000
 ```
 
 ## test
-package=0xf1d4ee4b3a2787cd066180857fa0170ccd721c28e20d5f334f48d585ed367284
-global=0x5055e205e2a783376ad64e1d49ae87409ac171e4d9c8d3ade32fc74cb0d112c0
-display=0x214c831d8c2d5adf30670edcacb8be95fdee8c1824e753e90e42d88c3eb349f0
-publisher=0x7ac826e73f51d3a16879da612a47ef0a2d5f557351991a5f2cbaece504555ff3
-upgradeCap=0xdc178e3ffa8b62ecdbc62a364d15b6f8e62fbee0b3755b98a57e33412db022ee
+package=0xc5b18811206c9ef35b516cd90f1736e7504f17fec147179298cc6851f2aa10a9
+global=0x9876b64fad60ef76235f56c3221a4ee1aa891eaa3b86b10ed16195169c7c3e19
+display=0x883b21b9560804279f490d9ac7f22422e6f757a1104247332220a87f7151e78e
+publisher=0x29be64a5228fae5fb0441d34f48361df7b8e0cf0b6a5774526c2ecdea22dc9c3
+upgradeCap=0xaa7b743055eece1de9ec725df43e648d9f3dca293551947870032fb432ca1643
 clock=0x6
 
 ### set_whitelist
