@@ -82,6 +82,15 @@ public entry fun set_whitelist(
     ctx: &mut TxContext
 )
 
+// set prices
+// called by admin
+public entry fun set_prices(
+    global: &mut Global,
+    price_whitelist: u64,
+    price_public: u64,
+    ctx: &mut TxContext
+) 
+
 // batch mint SuiCat to team
 // [SuiCat#1, SuiCat#3000]
 // called by admin

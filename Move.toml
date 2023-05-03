@@ -1,12 +1,11 @@
 [package]
 name = "suicat"
-version = "0.0.1"
+version = "0.1.0"
 #published-at = ""
 
 [dependencies]
-# TODO
-#Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework", rev = "devnet" }
-Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" }
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "ae1212baf8f0837e25926d941db3d26a61c1bea2" }
+#Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" }
 
 [addresses]
 suicat =  "0x0"

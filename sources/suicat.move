@@ -19,19 +19,18 @@ module suicat::suicat {
     use sui::tx_context::{Self, TxContext, sender};
 
     const NAME: vector<u8> = b"SuiCat#";
-    const DEFAULT_LINK: vector<u8> = b"https://dmens-app.coming.chat";
+    const DEFAULT_LINK: vector<u8> = b"https://dmens.coming.chat";
     const DEFAULT_IMAGE_URL: vector<u8> = b"ipfs://QmUXzrqtqt5oahp1VBc8Jh5s4hts3tv7fuVxHEmjjmzTvP/dmens-cat.png";
     const DESCRIPTION: vector<u8> = b"The DMENS NFT-Pass program has been launched to encourage community participation, contribution, and development by attracting more partners and expanding the community.";
-    const PROJECT_URL: vector<u8> = b"https://dmens-app.coming.chat";
+    const PROJECT_URL: vector<u8> = b"https://dmens.coming.chat";
     const CREATOR: vector<u8> = b"ComingChat";
 
     const MAX_SUPPLY: u16 = 10000;
     const MAX_U64: u64 = 18446744073709551615;
-    const START: u64 = 1682427600000; // 2023-04-25 21:00:00
+    const START: u64 = 1683637200000; // 2023-05-09 21:00:00
     const STAGE_WHITELIST: u64 = 72 * 60 * 60 * 1000; // 72 hours for whitelist
-    // TODO: replace on mainnet
-    const PRICE_WHITELIST: u64 = 900_000_000; // 0.9 SUI
-    const PRICE_PUBLIC: u64 = 1_000_000_000; // 1 SUI
+    const PRICE_WHITELIST: u64 = 300_000_000_000; // 300 SUI
+    const PRICE_PUBLIC: u64 = 1_000_000_000_000; // 1000 SUI
     const TEAM_RESERVE: u16 = 3000;
 
     const ERR_NO_PERMISSION: u64 = 1;
@@ -321,6 +320,18 @@ module suicat::suicat {
         assert!(global.creator == tx_context::sender(ctx), ERR_NO_PERMISSION);
 
         global.start_time = start_time
+    }
+
+    public entry fun set_prices(
+        global: &mut Global,
+        price_whitelist: u64,
+        price_public: u64,
+        ctx: &mut TxContext
+    ) {
+        assert!(global.creator == tx_context::sender(ctx), ERR_NO_PERMISSION);
+
+        global.price_whitelist = price_whitelist;
+        global.price_public = price_public
     }
 
     public entry fun set_whitelist(
