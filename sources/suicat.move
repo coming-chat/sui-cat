@@ -29,7 +29,7 @@ module suicat::suicat {
     const MAX_U64: u64 = 18446744073709551615;
     const START: u64 = 1683637200000; // 2023-05-09 21:00:00
     const STAGE_WHITELIST: u64 = 72 * 60 * 60 * 1000; // 72 hours for whitelist
-    const PRICE_WHITELIST: u64 = 300_000_000_000; // 300 SUI
+    const PRICE_WHITELIST: u64 = 256_000_000_000; // 256 SUI
     const PRICE_PUBLIC: u64 = 1_000_000_000_000; // 1000 SUI
     const TEAM_RESERVE: u16 = 3000;
 
