@@ -1,5 +1,5 @@
 import {
-    Ed25519Keypair, JsonRpcProvider, RawSigner, testnetConnection, TransactionBlock,
+    Connection, Ed25519Keypair, JsonRpcProvider, RawSigner, TransactionBlock,
 } from '@mysten/sui.js';
 
 import * as dotenv from "dotenv";
@@ -10,11 +10,12 @@ async function main() {
     const privkey = process.env.e76ePRIVKEY ?? "empty"
     const keypair = Ed25519Keypair.fromSecretKey(Buffer.from(privkey, 'hex'))
 
-    const provider = new JsonRpcProvider(testnetConnection)
+    const connection = new Connection({fullnode: "https://rpc-mainnet.suiscan.xyz:443"})
+    const provider = new JsonRpcProvider(connection)
     const signer = new RawSigner(keypair, provider)
 
-    const packageId = "0xc5b18811206c9ef35b516cd90f1736e7504f17fec147179298cc6851f2aa10a9"
-    const global = "0x9876b64fad60ef76235f56c3221a4ee1aa891eaa3b86b10ed16195169c7c3e19"
+    const packageId = "0x6e8afef4fe19f8981ca0b651b2ca4e60191790b7cef2ba8664f0f2e073803f3d"
+    const global = "0xa233bbfe148cb67da828c7d1e4817374995fc112fda379b39c22b770f47e85f7"
     const startTime = 1682065800000; // 2023-04-21 16:30:00
 
     const txb = new TransactionBlock();

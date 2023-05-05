@@ -1,5 +1,5 @@
 import {
-    Ed25519Keypair, JsonRpcProvider, RawSigner, testnetConnection, TransactionBlock,
+    Connection, Ed25519Keypair, JsonRpcProvider, RawSigner, TransactionBlock,
 } from '@mysten/sui.js';
 
 import * as dotenv from "dotenv";
@@ -11,7 +11,8 @@ async function main() {
     const privkey = process.env.e76ePRIVKEY ?? "empty"
     const keypair = Ed25519Keypair.fromSecretKey(Buffer.from(privkey, 'hex'))
 
-    const provider = new JsonRpcProvider(testnetConnection)
+    const connection = new Connection({fullnode: "https://rpc-mainnet.suiscan.xyz:443"})
+    const provider = new JsonRpcProvider(connection)
     const signer = new RawSigner(keypair, provider)
 
     const { modules, dependencies } = JSON.parse(
