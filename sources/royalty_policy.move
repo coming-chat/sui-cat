@@ -15,8 +15,6 @@ module suicat::royalty_policy {
     use sui::package::Publisher;
     use sui::transfer;
 
-    use suicat::suicat::SuiCat;
-
     /// The `amount_bp` passed is more than 100%.
     const EIncorrectArgument: u64 = 0;
     /// The `Coin` used for payment is not enough to cover the fee.
@@ -69,12 +67,12 @@ module suicat::royalty_policy {
         policy::add_receipt(Rule {}, request)
     }
 
-    public fun get_rules(policy: &TransferPolicy<SuiCat>): (u16, address){
+    public fun get_rules<SuiCat>(policy: &TransferPolicy<SuiCat>): (u16, address){
         let config: &Config = policy::get_rule(Rule {}, policy);
         return (config.amount_bp, config.beneficiary)
     }
 
-    public entry fun new_royalty_policy(
+    public fun new_royalty_policy<SuiCat>(
         publisher: &Publisher,
         amount_bp: u16,
         ctx: &mut TxContext
@@ -87,7 +85,7 @@ module suicat::royalty_policy {
         transfer::public_transfer(cap, sender(ctx));
     }
 
-    public entry fun update_royalty_bp(
+    public entry fun update_royalty_bp<SuiCat>(
         policy: &mut TransferPolicy<SuiCat>,
         cap: &TransferPolicyCap<SuiCat>,
         amount_bp: u16

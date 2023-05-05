@@ -1,5 +1,8 @@
 # SUI CAT
- 
+The DMENS NFT-Pass program has been launched to encourage community participation, contribution, 
+and development by attracting more partners and expanding the community.
+
+`10000` SuiCat NFTs are equivalent to 20% of DMens equity (tokens).
 
 ## Sui Object Display Standard
 
@@ -13,6 +16,13 @@ The basic set of properties suggested includes:
 
 [Sui Object Display Standard](https://docs.sui.io/build/sui-object-display)
 
+## Transfer Policy
+[TransferPolicy](https://github.com/MystenLabs/sui/blob/sui-v1.0.0/crates/sui-framework/packages/sui-framework/sources/kiosk/transfer_policy.move) 
+is a highly customizable primitive, which provides an
+interface for the type owner to set custom transfer rules for every
+deal performed in the `Kiosk` or a similar system that integrates with TP.
+
+SuiCat provides a `royalty_policy` shared object, set the default `5% royalty`.
 
 ## Core Object
 ```move
@@ -74,6 +84,15 @@ public entry fun set_start_time(
     ctx: &mut TxContext
 )
 
+// set prices of SuiCat
+// called by admin
+public entry fun set_prices(
+    global: &mut Global,
+    price_whitelist: u64,
+    price_public: u64,
+    ctx: &mut TxContext
+)
+
 // set wilte list accounts
 // called by admin
 public entry fun set_whitelist(
@@ -116,6 +135,14 @@ public entry fun withdraw(
     global: &mut Global,
     ctx: &mut TxContext
 )
+
+// update the royalty rate of SuiCat
+// called by admin
+public entry fun update_royalty_bp<SuiCat>(
+    policy: &mut TransferPolicy<SuiCat>,
+    cap: &TransferPolicyCap<SuiCat>,
+    amount_bp: u16
+)
 ```
 
 
@@ -125,11 +152,14 @@ sui client publish --gas-budget 1000000000
 ```
 
 ## mainnet
-package=0x8a1b7bf27a88e36602c373536a18c8bf2dde3633d91f5a070aa4b460e55e4868
-global=0xb5e4ee5ce9e9e1552d9bd4a330cc3cea62c3c9a0fa35b473d1b73a93ca1b99fc
-display=0x466cb9284d2e4a1f5ba6e65888e7fce3016b29858592fffe414ff33a39a8648f
-publisher=0x879a4df5af14a967e9d7da9e03c31db40012f4ab0c43abaee52a9b4c541d888d
-upgradeCap=0x457f2a8103da36a25be37dc6bab54c915f9fae74710ccf9aa5b36703448f34f8
+package=0x6e8afef4fe19f8981ca0b651b2ca4e60191790b7cef2ba8664f0f2e073803f3d
+global=0xa233bbfe148cb67da828c7d1e4817374995fc112fda379b39c22b770f47e85f7
+policy=0x9c1969ebe46c491b60fa0ace12ec80f5b037794c2c8b5c976c50d07b5e61da6e
+policyCap=0x2c61ec298fde843f5ab89a900d210a02dac272f217aafb076bd62f79597003db
+display=0x42d25dd8866f0417999f0c7582cbc2a413e74fbad33664f6a48b9989faff14e7
+publisher=0x4d1418cc963fa0378c515901fd11d2bd29d04c6c4e797d5abc50151ffed245b5
+upgradeCap=0x785a8b75fe6d0812325546e84fc79c01f62f272e7f2788cd860d5869d3bf63f1
+policyConfig=0xeb258c8482672b807cbc0d7bcd70c535239de3cfa6d245715f245086db54ec1c
 deployer=0x0f6e65716f1a33317c8914b24cc006475e6fafd797e34ffae72c76bf5ed4be12
 clock=0x6
 
@@ -187,4 +217,15 @@ sui client call --gas-budget 100000000 \
     --function update_version \
     --type-args $package::suicat::SuiCat \
     --args $display
+```
+
+## update royalty rate
+
+```bash
+sui client call --gas-budget 100000000 \
+    --package $package \
+    --module royalty_policy \
+    --function update_royalty_bp \
+    --type-args $package::suicat::SuiCat \
+    --args $policy $policyCap 300
 ```

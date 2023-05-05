@@ -27,7 +27,7 @@ module suicat::royalty_policy_test {
         let publisher = package::test_claim(OTW {}, ctx(&mut scenario));
 
         // 1% royalty
-        royalty_policy::new_royalty_policy(&mut publisher, 100, ctx(&mut scenario));
+        royalty_policy::new_royalty_policy<SuiCat>(&mut publisher, 100, ctx(&mut scenario));
 
         let payment = coin::mint_for_testing<SUI>(5000, ctx(&mut scenario));
 
@@ -66,7 +66,7 @@ module suicat::royalty_policy_test {
             let policy = take_shared(&scenario);
             let cap =take_from_sender<TransferPolicyCap<SuiCat>>(&scenario);
 
-            royalty_policy::update_royalty_bp(&mut policy, &cap, 200);
+            royalty_policy::update_royalty_bp<SuiCat>(&mut policy, &cap, 200);
 
             return_to_sender(&scenario, cap);
             return_shared(policy)

@@ -18,6 +18,8 @@ module suicat::suicat {
     use sui::transfer;
     use sui::tx_context::{Self, TxContext, sender};
 
+    use suicat::royalty_policy::new_royalty_policy;
+
     const NAME: vector<u8> = b"SuiCat#";
     const DEFAULT_LINK: vector<u8> = b"https://dmens.coming.chat";
     const DEFAULT_IMAGE_URL: vector<u8> = b"ipfs://QmUXzrqtqt5oahp1VBc8Jh5s4hts3tv7fuVxHEmjjmzTvP/dmens-cat.png";
@@ -121,6 +123,9 @@ module suicat::suicat {
 
         // Commit first version of `Display` to apply changes.
         display::update_version(&mut display);
+
+        // Set 5% royalty
+        new_royalty_policy<SuiCat>(&publisher, 500, ctx);
 
         transfer::public_transfer(publisher, sender(ctx));
         transfer::public_transfer(display, sender(ctx));
@@ -413,18 +418,16 @@ module suicat::suicat {
 
         let value = balance::value(&global.balance);
 
-        if (value == 0) {
-            return
-        };
+        if (value > 0) {
+            let withdraw = coin::from_balance<SUI>(
+                balance::split(&mut global.balance, value),
+                ctx
+            );
 
-        let withdraw = coin::from_balance<SUI>(
-            balance::split(&mut global.balance, value),
-            ctx
-        );
-
-        transfer::public_transfer(
-            withdraw,
-            global.beneficiary
-        );
+            transfer::public_transfer(
+                withdraw,
+                global.beneficiary
+            )
+        }
     }
 }
