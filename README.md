@@ -22,7 +22,14 @@ is a highly customizable primitive, which provides an
 interface for the type owner to set custom transfer rules for every
 deal performed in the `Kiosk` or a similar system that integrates with TP.
 
-SuiCat provides a `royalty_policy` shared object, set the default `5% royalty`.
+- SuiCat provides a custom `royalty_policy` [shared object](https://explorer.sui.io/object/0x9c1969ebe46c491b60fa0ace12ec80f5b037794c2c8b5c976c50d07b5e61da6e), set the default `5% royalty`.
+
+- For [Sui Kiosk Royalty](https://explorer.sui.io/object/0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879?network=mainnet),
+SuiCat created a new `royalty_policy` [shared object](https://explorer.sui.io/object/0xb14bfebf22d4808bcd8bb2df2b681db26dce6c1c42194d5db1545df36b0cc580) by [kiosk-royalty](https://github.com/coming-chat/kiosk-royalty). 
+It's also the same `%5 royalty`.
+
+
+
 
 ## Core Object
 ```move
