@@ -6,7 +6,7 @@ export function load(path: string) {
     const whitelist = JSON.parse(readFileSync(path, "utf8"))
 
     console.log("load items:", whitelist.length)
-    equal(whitelist.length, 142)
+    equal(whitelist.length, 29)
 
     return whitelist
 }

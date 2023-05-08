@@ -17,7 +17,7 @@ async function main() {
     const packageId = "0x6e8afef4fe19f8981ca0b651b2ca4e60191790b7cef2ba8664f0f2e073803f3d"
     const global = "0xa233bbfe148cb67da828c7d1e4817374995fc112fda379b39c22b770f47e85f7"
 
-    const dataPath = "./data/whitelist2_difference_142.json"
+    const dataPath = "./data/whitelist3_difference_29.json"
     const ser_whitelist = batch_serialize(dataPath)
     console.log("batch size", ser_whitelist.length)
 
@@ -42,15 +42,15 @@ async function main() {
 
         console.log("current batch: ", i)
 
-        const result = await signer.dryRunTransactionBlock({
-            transactionBlock: txb
-        });
-        console.log(result.effects.gasUsed, result.effects?.status)
-
-        // const result = await signer.signAndExecuteTransactionBlock({
-        //     transactionBlock: txb, options: {showEffects: true}
+        // const result = await signer.dryRunTransactionBlock({
+        //     transactionBlock: txb
         // });
-        // console.log({ result }, result.effects?.status)
+        // console.log(result.effects.gasUsed, result.effects?.status)
+
+        const result = await signer.signAndExecuteTransactionBlock({
+            transactionBlock: txb, options: {showEffects: true}
+        });
+        console.log({ result }, result.effects?.status)
 
         await delay(10000)
     }
