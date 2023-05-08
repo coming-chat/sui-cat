@@ -17,7 +17,7 @@ async function main() {
     const packageId = "0x6e8afef4fe19f8981ca0b651b2ca4e60191790b7cef2ba8664f0f2e073803f3d"
     const global = "0xa233bbfe148cb67da828c7d1e4817374995fc112fda379b39c22b770f47e85f7"
 
-    const dataPath = "./data/whitelist1_109966.json"
+    const dataPath = "./data/whitelist2_difference_142.json"
     const ser_whitelist = batch_serialize(dataPath)
     console.log("batch size", ser_whitelist.length)
 
