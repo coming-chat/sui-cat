@@ -221,7 +221,7 @@ sui client call --gas-budget 100000000 \
     --module display \
     --function edit \
     --type-args $package::suicat::SuiCat \
-    --args $display "image_url" "ipfs://QmUwLR4GqGUyXCrHsUQGnmoLBhNWrRRt2VtxuyNCKeUVQS/{index}.png"
+    --args $display "image_url" "ipfs://QmRVvujvc6sz8dTBEQFB2JgmEXGdhDcMqGu5xM4uujSxwh/{index}.png"
     
 sui client call --gas-budget 100000000 \
     --package 0x2 \
